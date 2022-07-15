@@ -64,7 +64,12 @@ if scenario == scenarios[0]:
 elif scenario == scenarios[1]:
     opacity = 1
     scale_factor = 1
-    angle_increment = 0.103515  # from trial and error
+    angle_increment = 0.1035135 
+    # from trial and error,
+    # .1035135 is very close, maybe super-slightly too counterclockwise  
+    # .103513 very very slightly too much counterclockwise
+    # .103512 slightly too much counterclockwise
+    # .103515 way too clockwise
     size_x, size_y = 400, 400
     fps = 6000
 elif scenario == scenarios[2]:
