@@ -52,7 +52,7 @@ class Planet(object):
 
 # CHOOSE THE SCENARIO:
 scenarios = ['default', 'rotating', 'exaggerated']
-scenario = scenarios[1] 
+scenario = scenarios[2] 
 
 # inputs to draw() and setup based on scenario
 if scenario == scenarios[0]:
@@ -60,7 +60,7 @@ if scenario == scenarios[0]:
     scale_factor = 3
     angle_increment = 0
     size_x, size_y = 1200, 1200
-    fps = 10
+    fps = 24
 elif scenario == scenarios[1]:
     opacity = 1
     scale_factor = 1
@@ -74,9 +74,8 @@ elif scenario == scenarios[1]:
     fps = 6000
 elif scenario == scenarios[2]:
     opacity = 20
-    scale_factor = 0.7
-    angle_increment = 0  
-    # angle_increment 0.0185  # from trial and error
+    scale_factor = 0.5
+    angle_increment = 0
     size_x, size_y = 1200, 1200
     fps = 240
 
@@ -125,7 +124,7 @@ def setup():
     EPIMETHEUS.draw_size = 30 
     
     if scenario == scenarios[2]: 
-        SATURN.draw_size = 200
+        SATURN.draw_size = 250
         JANUS.draw_size = 90
         EPIMETHEUS.draw_size = 90 
     
@@ -167,4 +166,7 @@ def draw():
     
     # debug dialogue for scenario[1]
     # print("approx number of orbits: " + str(angle / (2 * PI)))
-    # println(frameCount)
+    
+    # debug framerate
+    println(frameRate)
+    println(frameCount)
