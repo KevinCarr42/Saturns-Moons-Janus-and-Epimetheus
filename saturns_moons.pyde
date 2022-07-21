@@ -22,8 +22,11 @@ class Planet(object):
         self.position = PVector(x, y)
         self.velocity = PVector(0, 0)
         self.acceleration = PVector(0,0)
-        self.look = (200, 50, 50)  # default for Saturn
-        self.draw_size = 80  # default for Saturn
+        self.look = (200, 50, 50)  # RGB: default look for Saturn
+        self.draw_size = 61  # default scale for Saturn: to scale should be 61 pixels 
+        self.history = []  # history of path to draw trail
+        self.max_history = 5
+        self.trail_opacity = 20
         
     def applyForce(self, force):
         f = PVector.div(force, self.mass)
@@ -33,11 +36,27 @@ class Planet(object):
         self.velocity.add(self.acceleration)
         self.position.add(self.velocity)
         self.acceleration.mult(0)
+        
+        self.history.append(self.position.copy())  # update the path
+        if len(self.history) > self.max_history:
+            self.history.pop(0)
     
     def display(self):    
-        fill(*self.look)
         noStroke()
+        fill(*self.look)
         ellipse(self.position.x, self.position.y, self.draw_size, self.draw_size)
+        beginShape()
+        
+        # trail from history
+        noFill()
+        beginShape()
+        stroke(self.look[0], self.look[1], self.look[2], self.trail_opacity)
+        for pos in self.history:
+            vertex(pos.x, pos.y)
+            noFill()
+            strokeWeight(self.draw_size)
+        endShape()
+        noStroke()
 
     def attract(self, m, G):
         force = PVector.sub(self.position, m.position)
@@ -52,11 +71,11 @@ class Planet(object):
 
 # CHOOSE THE SCENARIO:
 scenarios = ['default', 'rotating', 'exaggerated']
-scenario = scenarios[2] 
+scenario = scenarios[1] 
 
 # inputs to draw() and setup based on scenario
 if scenario == scenarios[0]:
-    opacity = 150
+    opacity = 220
     scale_factor = 3
     angle_increment = 0
     size_x, size_y = 1200, 1200
@@ -73,7 +92,7 @@ elif scenario == scenarios[1]:
     size_x, size_y = 400, 400
     fps = 6000
 elif scenario == scenarios[2]:
-    opacity = 20
+    opacity = 60
     scale_factor = 0.5
     angle_increment = 0
     size_x, size_y = 1200, 1200
@@ -111,22 +130,28 @@ def setup():
         orbital_correction = 4  # number of pixels of correction to orbit
     
     SATURN = Planet(m_s, 0, 0)
+    SATURN.draw_size = 61  # actual scale: should be 61 pixels
     
     JANUS = Planet(m_j, orbital_correction, o_j)
     JANUS.velocity = PVector(v_j, 0)
     JANUS.look = (239, 65, 239)
-    JANUS.draw_size = 30
+    JANUS.draw_size = 9  # actual scale: should be 0.09 pixels
     
     EPIMETHEUS = Planet(m_e, -orbital_correction, -o_e)
     # EPIMETHEUS.velocity = PVector(v_e, 0)
     EPIMETHEUS.velocity.x = v_e
     EPIMETHEUS.look = (102, 202, 102)
-    EPIMETHEUS.draw_size = 30 
+    EPIMETHEUS.draw_size = 6  # actual scale: should be 0.06 pixels 
     
     if scenario == scenarios[2]: 
-        SATURN.draw_size = 250
-        JANUS.draw_size = 90
-        EPIMETHEUS.draw_size = 90 
+        SATURN.draw_size = 240
+        JANUS.draw_size = 60
+        EPIMETHEUS.draw_size = 40 
+        
+    if scenario in ['rotating', 'exaggerated']: 
+        SATURN.trail_opacity = 0
+        JANUS.trail_opacity = 0
+        EPIMETHEUS.trail_opacity = 0 
     
     background(0)
 
@@ -168,5 +193,5 @@ def draw():
     # print("approx number of orbits: " + str(angle / (2 * PI)))
     
     # debug framerate
-    println(frameRate)
-    println(frameCount)
+    # println(frameRate)
+    # println(frameCount)
