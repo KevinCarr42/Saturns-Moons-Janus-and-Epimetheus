@@ -71,34 +71,25 @@ class Planet(object):
 
 # CHOOSE THE SCENARIO:
 scenarios = ['default', 'rotating', 'exaggerated']
-scenario = scenarios[1] 
+scenario = scenarios[2] 
 
 # inputs to draw() and setup based on scenario
 if scenario == scenarios[0]:
     opacity = 220
     scale_factor = 3
-    angle_increment = 0
+    rotating = False
     size_x, size_y = 1200, 1200
     fps = 24
 elif scenario == scenarios[1]:
-    opacity = 1
+    opacity = 2
     scale_factor = 1
-    angle_increment = 0.10351375
-    # from trial and error,
-    # 0.1035138 very slightly clockwise
-    # 0.1035139 still slightly clockwise
-    # 0.103514 closest yet, but slightly clockwise
-    # .1035137 still too counterclockwise
-    # .1035135 is very close, maybe super-slightly too counterclockwise  
-    # .103513 very very slightly too much counterclockwise
-    # .103512 slightly too much counterclockwise
-    # .103515 way too clockwise
+    rotating = True
     size_x, size_y = 400, 400
-    fps = 6000
+    fps = 600
 elif scenario == scenarios[2]:
     opacity = 60
     scale_factor = 0.5
-    angle_increment = 0
+    rotating = False
     size_x, size_y = 1200, 1200
     fps = 240
 
@@ -109,9 +100,6 @@ def setup():
 
     size(size_x, size_y)
     frameRate(fps)
-    
-    global angle
-    angle = 0
 
     global G
     global SATURN
@@ -172,9 +160,10 @@ def draw():
     scale(scale_factor)
     
     # rotating reference frame
-    global angle
-    rotate(angle)
-    angle += angle_increment
+    if rotating:
+        # print(JANUS.position.x, JANUS.position.y, -atan2(JANUS.position.y, JANUS.position.x))  # debug
+        # 1.65 slightly more than pi/2 to centre at the bottom of the screen
+        rotate(-atan2(JANUS.position.y, JANUS.position.x) + 1.65)  
     
     force = SATURN.attract(JANUS, G)
     JANUS.applyForce(force)
@@ -193,9 +182,8 @@ def draw():
     JANUS.display()
     EPIMETHEUS.display()
     
-    # debug dialogue for scenario[1]
-    # print("approx number of orbits: " + str(angle / (2 * PI)))
-    
     # debug framerate
     # println(frameRate)
     # println(frameCount)
+    
+    # print()
