@@ -25,8 +25,8 @@ class Planet(object):
         self.look = (200, 50, 50)  # RGB: default look for Saturn
         self.draw_size = 61  # default scale for Saturn: to scale should be 61 pixels 
         self.history = []  # history of path to draw trail
-        self.max_history = 5
-        self.trail_opacity = 20
+        self.max_history = 3
+        self.trail_opacity = 42
         
     def applyForce(self, force):
         f = PVector.div(force, self.mass)
@@ -71,11 +71,11 @@ class Planet(object):
 
 # CHOOSE THE SCENARIO:
 scenarios = ['default', 'rotating', 'exaggerated']
-scenario = scenarios[2] 
+scenario = scenarios[0] 
 
 # inputs to draw() and setup based on scenario
 if scenario == scenarios[0]:
-    opacity = 220
+    opacity = 200
     scale_factor = 3
     rotating = False
     size_x, size_y = 1200, 1200
@@ -100,6 +100,9 @@ def setup():
 
     size(size_x, size_y)
     frameRate(fps)
+    
+    global n_orbits
+    n_orbits = 0
 
     global G
     global SATURN
@@ -130,15 +133,14 @@ def setup():
     JANUS.draw_size = 9  # actual scale: should be 0.09 pixels
     
     EPIMETHEUS = Planet(m_e, -orbital_correction, -o_e)
-    # EPIMETHEUS.velocity = PVector(v_e, 0)
-    EPIMETHEUS.velocity.x = v_e
+    EPIMETHEUS.velocity = PVector(v_e, 0)
     EPIMETHEUS.look = (102, 202, 102)
     EPIMETHEUS.draw_size = 6  # actual scale: should be 0.06 pixels 
     
     if scenario == scenarios[2]: 
-        SATURN.draw_size = 240
-        JANUS.draw_size = 60
-        EPIMETHEUS.draw_size = 40 
+        SATURN.draw_size = 240  # not to scale, actually 61 px 
+        JANUS.draw_size = 60  # not real or to scale
+        EPIMETHEUS.draw_size = 40  # not real or to scale 
         
     if scenario in ['rotating', 'exaggerated']: 
         SATURN.trail_opacity = 0
@@ -186,4 +188,16 @@ def draw():
     # println(frameRate)
     # println(frameCount)
     
-    # print()
+    # debug number of orbits
+    if frameCount > 3:
+        third_last = JANUS.history[-3].y
+        second_last = JANUS.history[-2].y
+        most_recent = JANUS.history[-1].y
+    
+        if most_recent < second_last and second_last > third_last: 
+            global n_orbits
+            n_orbits += 1
+            println("Number of complete orbits: {}".format(n_orbits))
+    
+    elif frameCount == 1:
+        println("Number of complete orbits: {}".format(n_orbits))
