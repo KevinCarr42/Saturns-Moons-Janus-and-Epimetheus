@@ -83,8 +83,12 @@ if scenario == scenarios[0]:
 elif scenario == scenarios[1]:
     opacity = 1
     scale_factor = 1
-    angle_increment = 0.1035135 
+    angle_increment = 0.10351375
     # from trial and error,
+    # 0.1035138 very slightly clockwise
+    # 0.1035139 still slightly clockwise
+    # 0.103514 closest yet, but slightly clockwise
+    # .1035137 still too counterclockwise
     # .1035135 is very close, maybe super-slightly too counterclockwise  
     # .103513 very very slightly too much counterclockwise
     # .103512 slightly too much counterclockwise
