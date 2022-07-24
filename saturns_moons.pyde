@@ -13,9 +13,8 @@ https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZV4yEcW3uDwOgGXKUUsPOM
   
 class Planet(object):
     """
-    Based on: Coding Train: The Nature of Code 2
-    https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZV4yEcW3uDwOgGXKUUsPOM
-
+    Based on: Coding Train: The Nature of Code 
+    2.8 Mutual Attraction: Mover class
     """
     def __init__(self, m, x, y):
         self.mass = m
@@ -111,7 +110,7 @@ def setup():
     
     # scaled constants
     G = 0.000006674300
-    m_s = 5683400000  # removing 2 sig figs actually makes a big difference
+    m_s = 5683400000
     
     if scenario == scenarios[0] or scenario == scenarios[1]:
         # DEFAULT ORBITS
