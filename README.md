@@ -1,5 +1,16 @@
 # Saturns Moons
  
-I don't think many people realise how amazing it is that two of Saturn's moons switch orbits. This is the epic tale of [Janus](https://en.wikipedia.org/wiki/Janus_(moon)) and [Epimetheus](https://en.wikipedia.org/wiki/Epimetheus_(moon)). Enjoy!
+I don't think many people realise how amazing it is that two of Saturn's moons share an orbit. This is the epic tale of [Janus](https://en.wikipedia.org/wiki/Janus_(moon)) and [Epimetheus](https://en.wikipedia.org/wiki/Epimetheus_(moon)).
 
-### THIS IS A WORK IN PROGRESS.......  stay tuned...
+Check out the explainer video I made:  [Janus and Epimetheus](https://youtu.be/nOBqsCAsXwA)
+
+Enjoy!
+
+
+Sources:
+* Saturn:  https://en.wikipedia.org/wiki/Saturn
+* Janus:  https://en.wikipedia.org/wiki/Janus_(moon)
+* Epimetheus:  https://en.wikipedia.org/wiki/Epimetheus_(moon)
+* Gravity:  https://en.wikipedia.org/wiki/Gravitational_constant
+* Processing.py:  https://py.processing.org/reference/
+* Coding Train: The Nature of Code 2:  https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZV4yEcW3uDwOgGXKUUsPOM
