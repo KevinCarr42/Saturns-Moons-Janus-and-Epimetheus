@@ -2,7 +2,9 @@
  
 I don't think many people realise how amazing it is that two of Saturn's moons share an orbit. This is the epic tale of [Janus](https://en.wikipedia.org/wiki/Janus_(moon)) and [Epimetheus](https://en.wikipedia.org/wiki/Epimetheus_(moon)).
 
-Check out the explainer video I made:  [Janus and Epimetheus](https://youtu.be/nOBqsCAsXwA)
+Check out the explainer video I made: 
+
+[![Janus and Epimetheus](https://img.youtube.com/vi/nOBqsCAsXwA/0.jpg)](https://www.youtube.com/watch?v=nOBqsCAsXwA)
 
 Enjoy!
 
